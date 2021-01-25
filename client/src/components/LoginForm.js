@@ -19,6 +19,7 @@ const LoginForm = () => {
   useEffect(() => {
     if (error) setShowAlert(true);
     else setShowAlert(false);
+    // console.log(error);
   }, [error]);
 
   const handleInputChange = (event) => {
@@ -37,14 +38,13 @@ const LoginForm = () => {
     }
 
     try {
-      const response = await loginUser(userFormData);
-
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
-
-      const { token, user } = await response.json();
-      // console.log(user);
+      const response = await loginUser(
+        { 
+          variables: {...userFormData}
+        });
+        
+      const token= response.data.login.token;
+      // console.log(token);
       Auth.login(token);
     } catch (err) {
       // console.error(err);
@@ -52,7 +52,7 @@ const LoginForm = () => {
     }
 
     setUserFormData({
-      username: '',
+      // username: '',
       email: '',
       password: '',
     });

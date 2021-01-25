@@ -10,7 +10,7 @@ import Navbar from './components/Navbar';
 // Add token to header
 const client = new ApolloClient({
   request: operation => {
-    const token = localStorage.getItem('id_token');
+    const token = localStorage.getItem('id_token_book');
 
     operation.setContext({
       headers: {
