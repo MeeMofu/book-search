@@ -22,6 +22,10 @@ const resolvers ={
 
             const correctPw =await user.isCorrectPassword(password);
             if (!correctPw) throw new AuthenticationError('Incorrect password')
+
+            const token = signToken(user);
+            return {token,user};
+
         },
         addUser: async (parent, args) => {
             const user = await User.create(args);
@@ -30,12 +34,12 @@ const resolvers ={
             return {token,user};
         },
         saveBook: async (parent, args, context) =>{
-            console.log(context);
+            // console.log(context);
             if (context.user) {
                 const updatedUser = await User.findByIdAndUpdate(
                     {_id: context.user._id}, 
                     {$addToSet: {savedBooks: args}}, 
-                    {new: true, runValidators: true}
+                    {new: true}
                 );
                 return updatedUser;
             }
