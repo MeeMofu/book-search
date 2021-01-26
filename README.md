@@ -2,7 +2,8 @@
 
 Live URL: https://limitless-harbor-04368.herokuapp.com/
 
-[!Screenshot](./assets/preview.png)
+![Screenshot](./assets/preview.png)
+
 
 ## Description
 
